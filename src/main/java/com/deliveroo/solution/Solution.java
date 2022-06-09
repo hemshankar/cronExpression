@@ -1,5 +1,9 @@
 package com.deliveroo.solution;
 
+import com.deliveroo.solution.handlers.HourHandler;
+import com.deliveroo.solution.handlers.MinuteHandler;
+import com.deliveroo.solution.models.ResultData;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -38,105 +42,14 @@ public class Solution {
     public static void main(String[] args) {
         //com.deliveroo.solution.Solution solution = new com.deliveroo.solution.Solution();
         //solution.solve(args);
-        MinuteHandler handler = new MinuteHandler();
-        ResultData resultData = handler.handle("5-15");
+        HourHandler handler = new HourHandler();
+        ResultData resultData = handler.handle("*/3");
         System.out.println(resultData);
     }
 
-    public enum TIME_FIELD {
-        MIN ("minute"),
-        HOUR("hour"),
-        DAY ("day of month"),
-        MONTH ("month"),
-        DAY_OF_WEEK("day of week");
 
-        private final String name;
-        private TIME_FIELD(String name_) {
-            name = name_;
-        }
-        public String toString() {
-            return this.name;
-        }
-    }
 
-    public interface IHandler {
-        public ResultData handle(String s);
-    }
 
-    public static class MinuteHandler implements IHandler{
-
-        ResultData resultData = new ResultData();
-        public ResultData handle(String s){
-            resultData.key = TIME_FIELD.MIN.toString();
-            if("*".equals(s)){
-                resultData.value = IntStream.rangeClosed(0, 60).boxed().map(x -> x + "").reduce("", (x,y) -> x + " " + y);
-            }else if(s.contains(",")){
-                String [] arr = s.split(",");
-                for(String str: arr) {
-                    resultData.value = resultData.value + str + " ";
-                }
-                resultData.value = resultData.value.trim();
-            }else if(s.contains("-")){
-                String [] arr = s.split("-");
-                resultData.value = IntStream.rangeClosed(Integer.parseInt(arr[0]), Integer.parseInt(arr[1])).boxed().map(x -> x + "").reduce("", (x,y) -> x + " " + y);
-            }else if(s.contains("/")){
-                String [] arr = s.split("/");
-                Integer start = 0;
-                if(!"*".equals(arr[0])){
-                    start = Integer.parseInt(arr[0]);
-                }
-                Integer interval = Integer.parseInt(arr[1]);
-                Integer limit = 60/interval;
-                resultData.value = IntStream.iterate(start, i -> i + interval).limit(limit).boxed().map(x -> x + "").reduce("", (x,y) -> x + " " + y);
-            }
-            return resultData;
-        }
-    }
-
-    public class HourHandler implements IHandler{
-        public ResultData handle(String s){
-            return null;
-        }
-    }
-
-    public class DayHandler implements IHandler{
-        public ResultData handle(String s){
-            return null;
-        }
-    }
-
-    public class MonthHandler implements IHandler{
-        public ResultData handle(String s){
-            return null;
-        }
-    }
-
-    public class DayOFWeekHandler implements IHandler{
-        public ResultData handle(String s){
-            return null;
-        }
-    }
-
-    public class SolutionFactory {
-        private SolutionFactory(){}
-        private SolutionFactory solutionFactory = new SolutionFactory();
-        private Map<TIME_FIELD, IHandler> handlerMap = new HashMap<>();
-        public SolutionFactory get(){
-            return solutionFactory;
-        }
-
-        public IHandler getHandler(TIME_FIELD field){
-            return handlerMap.get(field);
-        }
-
-        public boolean register(TIME_FIELD field, IHandler handler){
-            if(!handlerMap.containsKey(field)){
-                handlerMap.put(field, handler);
-                return true;
-            }
-            return false;
-        }
-    }
 
     public void solve(String [] args){
 
@@ -149,21 +62,7 @@ public class Solution {
 
         List<ResultData> result = new ArrayList<>();
         int i = 0;
-        /*SolutionFactory solutionFactory = SolutionFactory.get();
-        for(TIME_FIELD tf : TIME_FIELD.values()){
-            result.add(solutionFactory.getHandler(tf).handle(args[i++]));
-        }*/
-
         result.forEach(x -> System.out.println(x));
 
-    }
-
-    static class ResultData{
-        String key = "";
-        String value = "";
-
-        public String toString(){
-            return key + "\t\t\t" + value;
-        }
     }
 }
