@@ -26,11 +26,14 @@
     </properties>
 
     <dependencies>
+        <!-- https://mvnrepository.com/artifact/junit/junit -->
         <dependency>
-            <groupId>com.cronutils</groupId>
-            <artifactId>cron-utils</artifactId>
-            <version>9.1.6</version>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.4</version>
+            <scope>test</scope>
         </dependency>
+
     </dependencies>
 
 </project>

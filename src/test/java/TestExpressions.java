@@ -1,46 +1,41 @@
-import com.cronutils.mapper.CronMapper;
-import com.cronutils.model.Cron;
-import com.cronutils.model.definition.CronDefinition;
-import com.cronutils.model.definition.CronDefinitionBuilder;
-import com.cronutils.parser.CronParser;
-
-import static com.cronutils.model.CronType.QUARTZ;
+import com.deliveroo.solution.handlers.*;
+import com.deliveroo.solution.models.ResultData;
+import org.junit.Test;
 
 public class TestExpressions {
 
-    public static void main(String[] args) {
-
-        CronDefinition cronDefinition =
-                CronDefinitionBuilder.defineCron()
-                        .withSeconds().and()
-                        .withMinutes().and()
-                        .withHours().and()
-                        .withDayOfMonth()
-                        .supportsHash().supportsL().supportsW().and()
-                        .withMonth().and()
-                        .withDayOfWeek()
-                        .withIntMapping(7, 0) //we support non-standard non-zero-based numbers!
-                        .supportsHash().supportsL().supportsW().and()
-                        .withYear().optional().and()
-                        .instance();
-
-// or get a predefined instance
-        cronDefinition = CronDefinitionBuilder.instanceDefinitionFor(QUARTZ);
-
-
-        // Turn cron expressions into another format by using CronMapper:
-
-        CronMapper cronMapper = CronMapper.fromUnixToQuartz();
-        CronParser parser = new CronParser(cronDefinition);
-        Cron quartzCron = parser.parse("0 25 * ? * 1-5 *");
-
-        //Cron quartzCron = cronMapper.map(unixCron);
-        // and to get a String representation of it, we can use
-
-        quartzCron.asString();
-
-        //validate the cron expression!
-        quartzCron.validate();
+    @Test
+    public void testMinuteHandler() {
+        MinuteHandler minuteHandler = new MinuteHandler();
+        ResultData resultData = minuteHandler.handle("*");
+        assert (resultData.value.trim().equals("0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60"));
     }
 
+    @Test
+    public void testHourHandler() {
+        HourHandler handler = new HourHandler();
+        ResultData resultData = handler.handle("*");
+        assert (resultData.value.trim().equals("0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24"));
+    }
+
+    @Test
+    public void testDayHandler() {
+        DayHandler handler = new DayHandler();
+        ResultData resultData = handler.handle("*");
+        assert (resultData.value.trim().equals("0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31"));
+    }
+
+    @Test
+    public void testMonthHandler() {
+        MonthHandler handler = new MonthHandler();
+        ResultData resultData = handler.handle("*");
+        assert (resultData.value.trim().equals("0 1 2 3 4 5 6 7 8 9 10 11 12"));
+    }
+
+    @Test
+    public void testDayOfWeekHandler() {
+        DayOfWeekHandler handler = new DayOfWeekHandler();
+        ResultData resultData = handler.handle("*");
+        assert (resultData.value.trim().equals("0 1 2 3 4 5 6 7"));
+    }
 }
