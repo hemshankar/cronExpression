@@ -9,9 +9,9 @@ import java.util.Map;
 
 public class SolutionFactory {
     private SolutionFactory(){}
-    private SolutionFactory solutionFactory = new SolutionFactory();
+    private static SolutionFactory solutionFactory = new SolutionFactory();
     private Map<TIME_FIELD, IHandler> handlerMap = new HashMap<>();
-    public SolutionFactory get(){
+    public static SolutionFactory get(){
         return solutionFactory;
     }
 

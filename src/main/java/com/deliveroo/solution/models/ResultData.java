@@ -5,6 +5,6 @@ public class ResultData {
     public String value = "";
 
     public String toString(){
-        return key + "\t\t\t" + value;
+        return key + "\t" + value;
     }
 }
