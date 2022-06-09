@@ -1,3 +1,5 @@
+package com.deliveroo.solution;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -34,7 +36,7 @@ public class Solution {
 
     //pass each item to a handler
     public static void main(String[] args) {
-        //Solution solution = new Solution();
+        //com.deliveroo.solution.Solution solution = new com.deliveroo.solution.Solution();
         //solution.solve(args);
         MinuteHandler handler = new MinuteHandler();
         ResultData resultData = handler.handle("5-15");
