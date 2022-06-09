@@ -17,14 +17,14 @@ public class MonthHandler implements IHandler{
             } else if (s.contains(",")) {
                 String[] arr = s.split(",");
                 for (String str : arr) {
-                    int i = Integer.parseInt(s);
-                    if(i < 0 && i > 12) throw new Exception();
+                    int i = Integer.parseInt(str);
+                    if(i < 0 || i > 12) throw new Exception();
                     resultData.value = resultData.value + str + " ";
                 }
                 resultData.value = resultData.value.trim();
             } else if (s.contains("-")) {
                 String[] arr = s.split("-");
-                resultData.value = IntStream.rangeClosed(Integer.parseInt(arr[0]), Math.max(Integer.parseInt(arr[1]), 12)).boxed().map(x -> x + "").reduce("", (x, y) -> x + " " + y);
+                resultData.value = IntStream.rangeClosed(Integer.parseInt(arr[0]), Math.min(Integer.parseInt(arr[1]), 12)).boxed().map(x -> x + "").reduce("", (x, y) -> x + " " + y);
             } else if (s.contains("/")) {
                 String[] arr = s.split("/");
                 Integer start = 0;
