@@ -10,7 +10,7 @@ public class MonthHandler implements IHandler{
     ExpressionCommons expressionCommons = new ExpressionCommons(1,12);
     @Override
     public ResultData handle(String s){
-        resultData = expressionCommons.handle(s);
+        resultData = expressionCommons.handle(TIME_FIELD.MONTH.toString(),s);
         return resultData;
     }
 }

@@ -15,8 +15,8 @@ public class ExpressionCommons {
         last = last_;
     }
 
-    public ResultData handle(String s){
-        resultData.key = TIME_FIELD.DAY.toString();
+    public ResultData handle(String key, String s){
+        resultData.key = key;
         try {
             if ("*".equals(s)) {
                 resultData.value = IntStream.rangeClosed(first, last).boxed().map(x -> x + "").reduce("", (x, y) -> x + " " + y);

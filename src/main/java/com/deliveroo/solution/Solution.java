@@ -21,13 +21,13 @@ public class Solution {
         solution.solve(args);
     }
 
-    public void solve(String [] args){
+    public List<ResultData> solve(String [] args){
 
         if(args.length < 6){
             System.err.println("Invalid Input!");
             System.out.println("Usage MIN, HOUR, DAY, MONTH, DAY_OF_WEEK CMD");
             System.out.println("eg */15 0 1,15 * 1-5 /usr/bin/find");
-            return;
+            return null;
         }
 
         HandlerManager.registerHandlers();
@@ -45,5 +45,6 @@ public class Solution {
         result.forEach(x -> System.out.println(x));
 
         System.out.println("\n\n\nNOTE: Following are not supported yet -> L, W, #, ?, MON, TUE, WED, THU, FRI, SAT, SUN");
+        return result;
     }
 }

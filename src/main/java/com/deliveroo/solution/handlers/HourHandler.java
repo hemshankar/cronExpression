@@ -11,7 +11,7 @@ public class HourHandler implements IHandler{
     ExpressionCommons expressionCommons = new ExpressionCommons(0,23);
     @Override
     public ResultData handle(String s) {
-        resultData = expressionCommons.handle(s);
+        resultData = expressionCommons.handle(TIME_FIELD.HOUR.toString(),s);
         return resultData;
     }
 }

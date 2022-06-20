@@ -1,9 +1,10 @@
 import com.deliveroo.solution.handlers.HourHandler;
 import com.deliveroo.solution.handlers.MonthHandler;
 import com.deliveroo.solution.models.ResultData;
+import com.deliveroo.solution.models.TIME_FIELD;
 import org.junit.Test;
 
-public class MonthExpressionTests{
+public class MonthExpressionTests implements ExpressionsTest {
     MonthHandler handler = new MonthHandler();
 
    @Test
@@ -27,6 +28,7 @@ public class MonthExpressionTests{
    @Test
     public void testSingleValue() {
         ResultData resultData = handler.handle("11");
+        resultData.key.equals(TIME_FIELD.MONTH);
         assert (resultData.value.trim().equals("11"));
     }
 }

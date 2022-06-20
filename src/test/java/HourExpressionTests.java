@@ -1,9 +1,10 @@
 import com.deliveroo.solution.handlers.HourHandler;
 import com.deliveroo.solution.handlers.MinuteHandler;
 import com.deliveroo.solution.models.ResultData;
+import com.deliveroo.solution.models.TIME_FIELD;
 import org.junit.Test;
 
-public class HourExpressionTests{
+public class HourExpressionTests implements ExpressionsTest {
     HourHandler handler = new HourHandler();
 
     @Test
@@ -21,12 +22,14 @@ public class HourExpressionTests{
    @Test
     public void testInterval() {
         ResultData resultData = handler.handle("1/10");
+       resultData.key.equals(TIME_FIELD.HOUR);
         assert (resultData.value.trim().equals("1 11 21"));
     }
 
    @Test
     public void testSingleValue() {
         ResultData resultData = handler.handle("11");
+       resultData.key.equals(TIME_FIELD.HOUR);
         assert (resultData.value.trim().equals("11"));
     }
 }

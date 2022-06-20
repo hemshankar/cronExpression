@@ -13,7 +13,7 @@ public class MinuteHandler implements IHandler{
     @Override
     public ResultData handle(String s){
 
-        resultData = expressionCommons.handle(s);
+        resultData = expressionCommons.handle(TIME_FIELD.MIN.toString(),s);
         return resultData;
     }
 }

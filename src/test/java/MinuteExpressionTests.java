@@ -1,9 +1,10 @@
 import com.deliveroo.solution.handlers.DayHandler;
 import com.deliveroo.solution.handlers.MinuteHandler;
 import com.deliveroo.solution.models.ResultData;
+import com.deliveroo.solution.models.TIME_FIELD;
 import org.junit.Test;
 
-public class MinuteExpressionTests{
+public class MinuteExpressionTests implements ExpressionsTest {
     MinuteHandler handler = new MinuteHandler();
 
    @Test
@@ -27,6 +28,7 @@ public class MinuteExpressionTests{
    @Test
     public void testSingleValue() {
         ResultData resultData = handler.handle("11");
+       resultData.key.equals(TIME_FIELD.MIN);
         assert (resultData.value.trim().equals("11"));
     }
 }

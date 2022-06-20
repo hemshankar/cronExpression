@@ -10,7 +10,7 @@ public class DayOfWeekHandler implements IHandler{
     ExpressionCommons expressionCommons = new ExpressionCommons(0,6);
     @Override
     public ResultData handle(String s){
-        resultData = expressionCommons.handle(s);
+        resultData = expressionCommons.handle(TIME_FIELD.DAY_OF_WEEK.toString(),s);
         return resultData;
     }
 }

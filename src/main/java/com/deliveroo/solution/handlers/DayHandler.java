@@ -11,7 +11,7 @@ public class DayHandler implements IHandler{
 
     @Override
     public ResultData handle(String s){
-        resultData = expressionCommons.handle(s);
+        resultData = expressionCommons.handle(TIME_FIELD.DAY.toString(), s);
         return resultData;
     }
 }
