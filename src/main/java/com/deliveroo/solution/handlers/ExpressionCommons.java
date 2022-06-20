@@ -38,7 +38,7 @@ public class ExpressionCommons {
                     start = Integer.parseInt(arr[0]);
                 }
                 Integer interval = Integer.parseInt(arr[1]);
-                Integer limit = last / interval;
+                Integer limit = last / interval + 1;
                 resultData.value = IntStream.iterate(start, i -> i + interval).limit(limit).boxed().map(x -> x + "").reduce("", (x, y) -> x + " " + y);
             } else {
 
